@@ -17,7 +17,7 @@ def tags(request):
     context = {
         "tags": tag,
     }
-    return render(request, "todo/tags.html", context=context)
+    return render(request, "todo/tag_list.html", context=context)
 
 
 def task_status_render(request, task_id):
@@ -114,4 +114,3 @@ def delete_tag(request, tag_id):
         "tag": tag,
     }
     return render(request, "todo/tag_confirm_delete.html", context=context)
-
