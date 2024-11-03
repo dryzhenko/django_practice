@@ -11,7 +11,7 @@ class Tag(models.Model):
 class Task(models.Model):
     content = models.TextField(max_length=500)
     created_at = models.DateTimeField(auto_now_add=True)
-    deadline = models.DateTimeField(null=True, blank=True)
+    deadline = models.DateTimeField(default=None, null=True, blank=True)
     completed = models.BooleanField(default=False)
     tags = models.ManyToManyField(Tag, related_name="tasks", blank=True)
 
@@ -19,4 +19,4 @@ class Task(models.Model):
         ordering = ("completed", "-created_at",)
 
     def __str__(self):
-        return f"Created: {self.created_at}. "
+        return f"Created: {self.created_at}."
