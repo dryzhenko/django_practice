@@ -1,14 +1,20 @@
-from django.shortcuts import render
 import datetime
-
 from django.http import HttpResponse
+from django.shortcuts import render
+from todo.models import Task, Tag
 
 
 def index(request):
-    current_time = datetime.datetime.now()
-    return HttpResponse(
-        "<html>"
-        "<h1>Hello, world!</h1>"
-        f"<h6>Current time: {current_time}</h6>"
-        "</html>"
-    )
+    tasks = Task.objects.all()
+    context = {
+        "tasks": tasks,
+    }
+    return render(request, "todo/index.html", context=context)
+
+
+def tags(request):
+    tag = Tag.objects.all()
+    context = {
+        "tags": tag,
+    }
+    return render(request, "todo/tags.html", context=context)
