@@ -1,16 +1,26 @@
 from django.urls import path
-from todo.views import index, tags, add_task, add_tag, task_status_render, update_task, delete_task, update_tag, delete_tag
+from todo.views import (
+    TaskListView,
+    TaskCreateView,
+    TaskDeleteView,
+    TaskUpdateView,
+    TaskStatusUpdateView,
+    TagListView,
+    TagCreateView,
+    TagDeleteView,
+    TagUpdateView
+)
 
 urlpatterns = [
-    path("", index, name="index"),
-    path("tags/", tags, name="tags"),
-    path('task/add/', add_task, name="add_task"),
-    path('tag/add/', add_tag, name="add_tag"),
-    path('task/render/<int:task_id>/', task_status_render, name="task_status_render"),
-    path("task/update/<int:task_id>/", update_task, name="update_task"),
-    path("task/delete/<int:task_id>/", delete_task, name="delete_task"),
-    path("tag/update/<int:tag_id>/", update_tag, name="update_tag"),
-    path("tag/delete/<int:tag_id>/", delete_tag, name="delete_tag"),
+    path("", TaskListView.as_view(), name="task-list"),
+    path("tags/", TagListView.as_view(), name="tag-list"),
+    path("task/add/", TaskCreateView.as_view(), name="task-create"),
+    path("tag/add/", TagCreateView.as_view(), name="tag-create"),
+    path("task/render/<int:pk>/", TaskStatusUpdateView.as_view(), name="task-status-update"),
+    path("task/update/<int:pk>/", TaskUpdateView.as_view(), name="task-update"),
+    path("task/delete/<int:pk>/", TaskDeleteView.as_view(), name="task-delete"),
+    path("tag/update/<int:pk>/", TagUpdateView.as_view(), name="tag-update"),
+    path("tag/delete/<int:pk>/", TagDeleteView.as_view(), name="tag-delete"),
 ]
 
 app_name = "todo"
